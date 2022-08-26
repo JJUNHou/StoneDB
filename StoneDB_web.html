@@ -21,32 +21,45 @@ font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 </style>
 <div id="map"></div>
 <script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoibGVlanVuZGRhcmkiLCJhIjoiY2thYXdxYjh6MHI5ZzJxa2hsejRyMTFnMyJ9._5F3Mqj7QmtTwRjKTlZhbw';
+		mapboxgl.accessToken = 'pk.eyJ1IjoibGVlanVuZGRhcmkiLCJhIjoiY2thYXdxYjh6MHI5ZzJxa2hsejRyMTFnMyJ9._5F3Mqj7QmtTwRjKTlZhbw';
 
     StoneDB = "https://jjunhou.github.io/StoneDB/TL_SCCO_SIG_ver4.geojson"
 
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
-    center: [126.9799971, 37.5688492],
-    zoom: 11
+    center: [127.5, 36.5],
+    zoom: 5.5
 });
 
 
 map.on('load', function () {
     map.addLayer({
         'id': 'maine',
-        'type': 'line',
+        'type': 'fill',
         'source': {
             'type': 'geojson',
             'data':StoneDB
             },
         'layout': {},
         'paint': {
-            'line-color': '#088',
-            'line-width':3
+            'line-color': '#080ff',
+            'line-width':0.5
         }
     });
+    map.addLayer({
+    		'id':'maine',
+        'type':'line',
+        'source':{
+        		'type':'geojson',
+            'data':StoneDB
+        },
+        'layout':{},
+        'paint':{
+        		'line-color': '#000',
+            'line-width':3
+        }
+    })
 });
 
 map.on('click', 'maine', function(e) {
@@ -55,7 +68,6 @@ new mapboxgl.Popup()
 .setHTML(`<h3>` + e.features[0].properties.RN + `</h3>` + '<h4>' + '<b>' + '모델: ' + '</b>' + e.features[0].properties.Trans_Mdl + '</h4>' )
 .addTo(map);
 });
-
 
 </script>
  
